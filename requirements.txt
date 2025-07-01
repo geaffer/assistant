@@ -1,0 +1,9 @@
+openai
+python-dotenv
+pytz
+pyzmail36
+imapclient
+google-api-python-client
+google-auth
+google-auth-oauthlib
+requests
