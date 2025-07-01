@@ -1,24 +1,20 @@
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+import os
+import json
+import datetime
+import pytz
 from googleapiclient.discovery import build
-import datetime, pytz, os
+from google.oauth2 import service_account
 
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 def get_service():
-    creds = None
-    if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
-    return build('calendar', 'v3', credentials=creds)
+    # Railway 환경 변수에서 서비스 계정 JSON 로드
+    service_account_info = json.loads(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"))
+    credentials = service_account.Credentials.from_service_account_info(
+        service_account_info,
+        scopes=SCOPES
+    )
+    return build('calendar', 'v3', credentials=credentials)
 
 def get_events_range(start, end, service):
     events_result = service.events().list(
