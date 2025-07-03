@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      NAVER_EMAIL: ${{ secrets.NAVER_EMAIL }}
+      NAVER_APP_PASSWORD: ${{ secrets.NAVER_APP_PASSWORD }}
+      PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
+      PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
       - name: Checkout repository
