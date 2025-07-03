@@ -2,7 +2,7 @@ import openai
 import os
 import datetime
 
-openai.api_key = os.getenv("OPENAI_API_KEY")  # env로부터 바로 불러옴
+openai.api_key = os.getenv("OPENAI_API_KEY")  # GitHub Actions의 env에서 주입됨
 
 def analyze_with_gpt(full_text):
     today = datetime.date.today()
