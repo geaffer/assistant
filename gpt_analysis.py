@@ -1,10 +1,8 @@
 import openai
 import os
 import datetime
-from dotenv import load_dotenv
 
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("OPENAI_API_KEY")  # env로부터 바로 불러옴
 
 def analyze_with_gpt(full_text):
     today = datetime.date.today()
